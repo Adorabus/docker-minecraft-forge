@@ -6,4 +6,5 @@ RUN mkdir /mc
 WORKDIR /mc
 COPY eula.txt .
 COPY forge.sh .
+RUN chmod +x ./forge.sh
 CMD [ "./forge.sh" ]
