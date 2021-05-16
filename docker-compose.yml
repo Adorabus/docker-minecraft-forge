@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mc:
-    image: forge-server
+    image: adorabus/minecraft-forge
     ports:
       - 25565:25565
       # - 25575:25575 # RCON
@@ -12,5 +12,6 @@ services:
       - ./mods:/mc/mods
       - ./config:/mc/config
     environment:
+      forge_version: latest
       Xms: 6G
       Xmx: 6G
