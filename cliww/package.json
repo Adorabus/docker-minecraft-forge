@@ -1,0 +1,27 @@
+{
+  "name": "cliww",
+  "version": "1.4.0",
+  "description": "Provides a remote web interface to a wrapped child process.",
+  "main": "./dist/index.js",
+  "bin": {
+    "cliww": "./bin/cliww.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adorabus",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "minimist": "^1.2.5",
+    "socket.io": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.1",
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.7.4",
+    "@types/socket.io": "^2.1.4"
+  }
+}
