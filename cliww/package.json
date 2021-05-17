@@ -1,6 +1,6 @@
 {
   "name": "cliww",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Provides a remote web interface to a wrapped child process.",
   "main": "./dist/index.js",
   "bin": {

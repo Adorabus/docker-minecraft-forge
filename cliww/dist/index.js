@@ -35,6 +35,15 @@ app.get('/', (req, res) => {
 });
 const io = socketIO(server);
 const command = argv._.shift();
+if (!command) {
+    console.log('Usage: cliww [OPTIONS] command...');
+    console.log(`Options
+  --password PASSWORD
+  --limit MAXIMUM
+  --port PORT
+  --keepalive`);
+    process.exit(1);
+}
 const wrapper = new wrapper_1.Wrapper(command, argv._, argv);
 const messenger = new messenger_1.Messenger(io, wrapper, argv);
 wrapper.startProcess();

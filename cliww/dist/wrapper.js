@@ -21,6 +21,10 @@ class Wrapper extends events_1.EventEmitter {
         spawned.stdin.setDefaultEncoding('utf-8');
         spawned.stdout.setEncoding('utf-8');
         spawned.stderr.setEncoding('utf-8');
+        spawned.on('error', (e) => {
+            console.log(`-cliww: ${this.command}: command not found`);
+            process.exit(1);
+        });
         spawned.on('exit', (code, signal) => {
             this._isAlive = false;
             this.emit('exit', code, signal);
