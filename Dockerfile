@@ -3,7 +3,6 @@ ENV forge_version=recommended
 ENV Xms=6G
 ENV Xmx=6G
 ENV cliww_limit=200
-ENV Xmx=6G
 RUN mkdir /mc
 WORKDIR /mc
 COPY cliww .
