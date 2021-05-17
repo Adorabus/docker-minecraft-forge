@@ -6,6 +6,7 @@ services:
     ports:
       - 25565:25565
       # - 25575:25575 # RCON
+      - 8999:8999 #cliww
     volumes:
       - ./server.properties:/mc/server.properties
       - ./world:/mc/world
@@ -15,3 +16,5 @@ services:
       forge_version: latest
       Xms: 6G
       Xmx: 6G
+      cliww_limit: 200
+      cliww_password: changeme

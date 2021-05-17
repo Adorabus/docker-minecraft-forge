@@ -1,5 +1,18 @@
 #!/bin/bash
 
+if [ -f ".env" ]
+  then
+  while IFS= read -r line || [ -n "$line" ]; do
+    export $line
+  done < .env
+fi
+
+if [ -z $cliww_password ]
+  then
+  echo cliww_password is not set. A password is required!
+  exit 1
+fi
+
 FORGE_URL="https://files.minecraftforge.net/net/minecraftforge/forge/"
 
 # make it lowercase
