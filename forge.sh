@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -f ".env" ]
+  then
+  while IFS= read -r line || [ -n "$line" ]; do
+    export $line
+  done < .env
+fi
+
 FORGE_URL="https://files.minecraftforge.net/net/minecraftforge/forge/"
 
 # make it lowercase
@@ -20,12 +27,12 @@ if [ -z $forge_version ]
 elif [ $forge_version = latest ]
   then
   echo Finding latest version...
-  export forge_version=$(wget -O - -o /dev/null  $FORGE_URL | tr -d "\n" | sed -r 's/(.*Download Latest<br>\s+<small>)([^<]+)(.*)/\2/' | sed 's/ //g')
+  export forge_version=$(curl -s $FORGE_URL | tr -d "\n" | sed -r 's/(.*Download Latest<br>\s+<small>)([^<]+)(.*)/\2/' | sed 's/ //g')
   echo Found latest version \"$forge_version\"
 elif [ $forge_version = recommended ]
   then
   echo Finding recommended version...
-  export forge_version=$(wget -O - -o /dev/null  $FORGE_URL | tr -d "\n" | sed -r 's/(.*Download Recommended<br>\s+<small>)([^<]+)(.*)/\2/' | sed 's/ //g')
+  export forge_version=$(curl -s $FORGE_URL | tr -d "\n" | sed -r 's/(.*Download Recommended<br>\s+<small>)([^<]+)(.*)/\2/' | sed 's/ //g')
   echo Found recommended version \"$forge_version\"
 fi
 
@@ -34,7 +41,7 @@ if [ -f "forge-$forge_version.jar" ]
   start_server
 else
   echo Forge "$forge_version" not found, downloading installer...
-  wget https://maven.minecraftforge.net/net/minecraftforge/forge/$forge_version/forge-$forge_version-installer.jar
+  curl -O https://maven.minecraftforge.net/net/minecraftforge/forge/$forge_version/forge-$forge_version-installer.jar
   if [ $? -eq 0 ]
     then
     echo Installing forge server $forge_version...
