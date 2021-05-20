@@ -11,7 +11,7 @@ Minecraft Forge server.
 You can also mount .env file into /mc to set environment variables.
 
 ## Bind Mounts
-Mount anything you want into the `/mc` folder. (ex. server.properties, mods, world, config, etc.)
+Mount your minecraft server folder (containing: world, mods, etc.) to `/mc`.
 
 ## docker-compose
 Example docker-compose.yml
@@ -25,10 +25,7 @@ services:
       - 25565:25565
       # - 25575:25575 # RCON
     volumes:
-      - ./server.properties:/mc/server.properties
-      - ./world:/mc/world
-      - ./mods:/mc/mods
-      - ./config:/mc/config
+      - /home/fox/mc-forge:/mc
     environment:
       forge_version: latest
       Xms: 6G
