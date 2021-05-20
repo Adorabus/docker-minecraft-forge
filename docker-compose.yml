@@ -8,10 +8,7 @@ services:
       # - 25575:25575 # RCON
       - 8999:8999 #cliww
     volumes:
-      - ./server.properties:/mc/server.properties
-      - ./world:/mc/world
-      - ./mods:/mc/mods
-      - ./config:/mc/config
+      - /home/fox/mc-forge:/mc
     environment:
       forge_version: latest
       Xms: 6G

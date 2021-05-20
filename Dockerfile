@@ -1,18 +1,25 @@
 FROM openjdk:8-alpine
+
 ENV forge_version=recommended
 ENV Xms=6G
 ENV Xmx=6G
 ENV cliww_limit=200
-RUN mkdir /mc
-WORKDIR /mc
-COPY cliww .
-WORKDIR /mc/cliww
+
 RUN apk add --update nodejs npm bash curl
+
+WORKDIR /usr/local/bin
+COPY forge.sh ./forge
+RUN dos2unix ./forge
+RUN chmod +x ./forge
+
+
+COPY cliww /opt/cliww
+WORKDIR /opt/cliww
 RUN npm install
 RUN npm link
+
+RUN mkdir /mc
 WORKDIR /mc
 COPY eula.txt .
-COPY forge.sh .
-RUN dos2unix forge.sh
-RUN chmod +x ./forge.sh
-CMD [ "./forge.sh" ]
+
+CMD [ "forge" ]
