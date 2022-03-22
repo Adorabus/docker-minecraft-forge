@@ -14,7 +14,7 @@ export forge_version=$(echo $forge_version | tr '[:upper:]' '[:lower:]')
 
 start_server () {
   echo Starting forge server...
-  if ! java -Xms${Xms} -Xmx${Xmx} -jar forge-$forge_version.jar -nogui;
+  if ! java -Xms${Xms} -Xmx${Xmx} -jar forge-$forge_version.jar -nogui -Dlog4j.configurationFile=log4j2_112-116.xml;
     then
     echo "Error starting server: \"forge-$forge_version.jar\""
   fi
