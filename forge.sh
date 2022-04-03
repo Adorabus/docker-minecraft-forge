@@ -20,7 +20,7 @@ export forge_version=$(echo $forge_version | tr '[:upper:]' '[:lower:]')
 
 start_server () {
   echo Starting forge server with cliww...
-  cliww --limit $cliww_limit --keepalive --password $cliww_password java -Dterminal.ansi=true -Xms${Xms} -Xmx${Xmx} -jar forge-$forge_version.jar -nogui -Dlog4j.configurationFile=log4j2_112-116.xml
+  cliww --limit $cliww_limit --keepalive --password $cliww_password java -Dterminal.ansi=true -Dlog4j.configurationFile=log4j2_112-116.xml -Xms${Xms} -Xmx${Xmx} -jar forge-$forge_version.jar -nogui
 }
 
 if [ -z $forge_version ]
