@@ -41,6 +41,6 @@ When using cliww, make sure to expose port `8999`.
 
 ### Environment Variables
 
-`cliww_password` Maximum number lines to keep in cliww buffer. **THIS IS REQUIRED**
+`cliww_password` Password to access cliww. **THIS IS REQUIRED**
 
 `cliww_limit` Maximum number lines to keep in cliww buffer. (default: 200)
