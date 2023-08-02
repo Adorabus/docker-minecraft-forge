@@ -1,4 +1,4 @@
-FROM openjdk:8-alpine
+FROM openjdk:19-jdk-alpine
 
 ENV forge_version=recommended
 ENV Xms=6G
