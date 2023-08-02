@@ -23,6 +23,36 @@ start_server () {
   cliww --limit $cliww_limit --keepalive --password $cliww_password java -Dterminal.ansi=true -Dlog4j.configurationFile=log4j2_112-116.xml -Xms${Xms} -Xmx${Xmx} -jar forge-$forge_version.jar -nogui
 }
 
+set_vars () {
+  echo "Setting variables..."
+
+  touch user_jvm_args.txt
+
+  if [ -z $Xms ]
+  then
+    echo "Xms not set, using default value of 1G"
+    echo "-Xms1G" > user_jvm_args.txt
+  else
+    echo "Xms set to $Xms"
+    echo "-Xms$Xms" > user_jvm_args.txt
+  fi
+
+  if [ -z $Xmx ]
+  then
+    echo "Xmx not set, using default value of 1G"
+    echo "-Xmx1G" >> user_jvm_args.txt
+  else
+    echo "Xmx set to $Xmx"
+    echo "-Xmx$Xmx" >> user_jvm_args.txt
+  fi
+}
+
+start_server_new () {
+  set_vars
+  echo Starting forge server...
+  cliww --limit $cliww_limit --keepalive --password $cliww_password ./run.sh
+}
+
 if [ -z $forge_version ]
   then
   echo Environment variable forge_version is required!
@@ -42,6 +72,9 @@ fi
 if [ -f "forge-$forge_version.jar" ]
   then
   start_server
+elif [ -f "run.sh" ]
+  then
+  start_server_new
 else
   echo Forge "$forge_version" not found, downloading installer...
   curl -O https://maven.minecraftforge.net/net/minecraftforge/forge/$forge_version/forge-$forge_version-installer.jar
@@ -49,7 +82,14 @@ else
     then
     echo Installing forge server $forge_version...
     java -jar forge-$forge_version-installer.jar --installServer
-    start_server
+
+    if [ -f "run.sh" ]
+    then
+      echo "Newer forge version detected, using run.sh"
+      start_server_new
+    else
+      start_server
+    fi
   else
     echo "Failed to find installer for forge version \"$forge_version\"."
     exit
