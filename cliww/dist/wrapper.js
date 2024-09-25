@@ -4,13 +4,13 @@ exports.Wrapper = void 0;
 const child = require("child_process");
 const events_1 = require("events");
 const util_1 = require("./util");
+const server_options_1 = require("./server-options");
 class Wrapper extends events_1.EventEmitter {
-    constructor(command, args = [], options = {}) {
+    constructor(command, args = []) {
         super();
         this._isAlive = false;
         this.command = command;
         this.args = args;
-        this.options = options;
     }
     startProcess() {
         if (this._isAlive) {
@@ -28,8 +28,9 @@ class Wrapper extends events_1.EventEmitter {
         spawned.on('exit', (code, signal) => {
             this._isAlive = false;
             this.emit('exit', code, signal);
-            if (this.options.keepalive && this.startedAt) {
-                if (util_1.secondsAgo(this.startedAt.valueOf()) > 5) {
+            console.log((0, server_options_1.getOptions)().keepalive, 'keepalive');
+            if ((0, server_options_1.getOptions)().keepalive && this.startedAt) {
+                if ((0, util_1.secondsAgo)(this.startedAt.valueOf()) > 5) {
                     this.emit('message', 'Restarting wrapped process...');
                     this.startProcess();
                 }

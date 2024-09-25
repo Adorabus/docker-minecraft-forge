@@ -1,6 +1,16 @@
 # CLIWW
 Provides a remote web interface to a wrapped child process.
 
+![cliww-2](https://user-images.githubusercontent.com/27739941/118569610-20688a00-b72f-11eb-848e-07778d623fa4.png)
+---
+
+![cliww-1](https://user-images.githubusercontent.com/27739941/118569605-1e063000-b72f-11eb-8683-236c45028f17.png)
+
+## Installation
+
+Unzip, enter directory, run `npm install` and `npm link`.
+
+
 ## Usage
 
 `cliww [OPTIONS] command...`
